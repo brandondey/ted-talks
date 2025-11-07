@@ -1,0 +1,38 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environment
+.env
+.venv
+
+# Data (large files - optional, remove if you want to include data)
+# Comment out the line below if you want to commit the CSV data
+# data/*.csv
+
+# Generated visualizations (can be regenerated)
+laughter_viz.txt
+
+# Large JSON files (optional - this is 37MB)
+# insights_data.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.log
+*.tmp
