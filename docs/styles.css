@@ -1,0 +1,603 @@
+/* Global Styles */
+:root {
+    --color-primary: #eb3941;
+    --color-secondary: #f15e64;
+    --color-dark: #1a1a1a;
+    --color-gray: #666;
+    --color-light-gray: #f8f9fa;
+    --color-border: #ddd;
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+
+    --font-serif: 'Georgia', 'Times New Roman', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'Courier New', 'Consolas', monospace;
+
+    --max-width: 1200px;
+    --max-width-text: 700px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--color-dark);
+    background: #fff;
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: var(--color-primary);
+}
+
+h3 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 900px;
+    padding: 40px;
+}
+
+.hero-title {
+    font-size: 5em;
+    font-weight: 900;
+    margin-bottom: 0.3em;
+    letter-spacing: -2px;
+}
+
+.hero-subtitle {
+    font-size: 1.8em;
+    font-weight: 300;
+    margin-bottom: 2em;
+    opacity: 0.95;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    margin: 60px 0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-family: var(--font-sans);
+    font-size: 3.5em;
+    font-weight: 900;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    opacity: 0.7;
+}
+
+.scroll-indicator span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    font-family: var(--font-sans);
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Introduction Section */
+.intro-section {
+    padding: 120px 0;
+    background: white;
+}
+
+.intro-text {
+    max-width: var(--max-width-text);
+    margin: 0 auto;
+}
+
+.intro-large {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.intro-emphasis {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-top: 1.5em;
+}
+
+/* Scrollytelling Sections */
+.scrolly-section {
+    position: relative;
+    display: flex;
+    padding: 60px 0 120px 0;
+    background: var(--color-light-gray);
+}
+
+.scrolly-graphic {
+    position: sticky;
+    top: 20vh;
+    width: 50%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.scrolly-steps {
+    width: 50%;
+    padding: 40px;
+}
+
+.step {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 40px;
+    background: white;
+    margin-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    opacity: 0.3;
+    transition: opacity 0.5s;
+}
+
+.step.is-active {
+    opacity: 1;
+}
+
+.step h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.step p {
+    margin-bottom: 1em;
+}
+
+.step strong {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+/* Visualization Containers */
+.viz-container {
+    width: 100%;
+    min-height: 400px;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.viz-container.large {
+    min-height: 600px;
+}
+
+/* Explorer Section */
+.explorer-section {
+    padding: 120px 0;
+    background: white;
+}
+
+.section-intro {
+    font-size: 1.1em;
+    color: var(--color-gray);
+    max-width: var(--max-width-text);
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+.explorer-controls {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 30px;
+    background: var(--color-light-gray);
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+.explorer-controls label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 0.9em;
+}
+
+.explorer-controls input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.explorer-controls input[type="range"] {
+    width: 200px;
+    cursor: pointer;
+}
+
+.explorer-insights {
+    margin-top: 40px;
+}
+
+.insight-box {
+    background: var(--color-light-gray);
+    padding: 30px;
+    border-radius: 8px;
+    border-left: 4px solid var(--color-primary);
+}
+
+.insight-box h4 {
+    font-family: var(--font-sans);
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+/* Word Cloud Section */
+.wordcloud-section {
+    padding: 120px 0;
+    background: var(--color-light-gray);
+}
+
+.word-examples {
+    margin-top: 40px;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    position: relative;
+}
+
+.word-examples.hidden {
+    display: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: var(--color-gray);
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--color-primary);
+}
+
+#example-talks {
+    margin-top: 20px;
+}
+
+.example-talk {
+    padding: 20px;
+    margin-bottom: 20px;
+    background: var(--color-light-gray);
+    border-radius: 4px;
+}
+
+.example-talk .talk-title {
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 5px;
+}
+
+.example-talk .talk-speaker {
+    font-size: 0.9em;
+    color: var(--color-gray);
+    margin-bottom: 10px;
+}
+
+.example-talk .talk-opener {
+    font-style: italic;
+}
+
+/* Occupation Section */
+.occupation-section {
+    padding: 120px 0;
+    background: white;
+}
+
+.occupation-insight {
+    margin-top: 40px;
+    max-width: var(--max-width-text);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+/* Viral Section */
+.viral-section {
+    padding: 120px 0;
+    background: var(--color-light-gray);
+}
+
+.viral-list {
+    display: grid;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.viral-item {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.viral-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.viral-rank {
+    font-family: var(--font-sans);
+    font-size: 3em;
+    font-weight: 900;
+    color: var(--color-primary);
+    min-width: 80px;
+}
+
+.viral-content h3 {
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+}
+
+.viral-speaker {
+    font-size: 0.9em;
+    color: var(--color-gray);
+    margin-bottom: 10px;
+}
+
+.viral-views {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.viral-opener {
+    font-style: italic;
+    color: var(--color-gray);
+    font-size: 0.95em;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 120px 0;
+    background: white;
+}
+
+/* Methodology Section */
+.methodology-section {
+    padding: 120px 0;
+    background: var(--color-light-gray);
+}
+
+.methodology-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.method-box {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.method-box h3 {
+    font-size: 1.3em;
+    margin-bottom: 0.5em;
+    color: var(--color-primary);
+}
+
+.method-box p {
+    font-size: 0.9em;
+}
+
+/* Conclusion Section */
+.conclusion-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+}
+
+.conclusion-section h2 {
+    color: white;
+}
+
+.conclusion-text {
+    max-width: var(--max-width-text);
+    margin: 0 auto 1em auto;
+    font-size: 1.1em;
+}
+
+.conclusion-emphasis {
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 1.5em 0;
+}
+
+/* Footer */
+footer {
+    padding: 60px 0;
+    background: var(--color-dark);
+    color: white;
+    text-align: center;
+}
+
+footer a {
+    color: var(--color-secondary);
+    margin: 0 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .scrolly-section {
+        flex-direction: column;
+    }
+
+    .scrolly-graphic {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        top: 0;
+    }
+
+    .scrolly-steps {
+        width: 100%;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+
+    .hero-title {
+        font-size: 3em;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3em;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    h2 {
+        font-size: 2em;
+    }
+
+    .step {
+        padding: 40px 20px;
+        min-height: 60vh;
+    }
+
+    .methodology-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tooltip */
+.tooltip {
+    position: absolute;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+/* D3 Styles */
+.axis path,
+.axis line {
+    stroke: var(--color-border);
+}
+
+.axis text {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    fill: var(--color-gray);
+}
+
+.chart-title {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    fill: var(--color-dark);
+}
+
+.chart-label {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    fill: var(--color-gray);
+}

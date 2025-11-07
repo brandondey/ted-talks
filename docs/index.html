@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive analysis of 4,005 TED talk opening lines. Discover the statistical patterns behind viral presentations.">
+    <title>The Laughter Effect | TED Talk Opener Analysis</title>
+
+    <!-- D3.js for visualizations -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!-- Scrollama for scroll-triggered animations -->
+    <script src="https://unpkg.com/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">The Laughter Effect</h1>
+            <p class="hero-subtitle">What I learned from analyzing 4,005 TED talk opening lines</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">4,005</span>
+                    <span class="stat-label">Talks Analyzed</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">8.6B</span>
+                    <span class="stat-label">Total Views</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">44%</span>
+                    <span class="stat-label">Laughter Boost</span>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-text">
+                <p class="intro-large">Last November, I downloaded every TED talk transcript I could find. All 4,005 of them.</p>
+                <p>Then I did something slightly obsessive: I extracted the first sentence from every single talk and ran it through every NLP model I could get my hands on.</p>
+                <p>I was looking for the secret formula. The magic words that make a talk go viral.</p>
+                <p class="intro-emphasis">What I found instead was far more interesting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section 1: The Laughter Effect -->
+    <section class="scrolly-section" id="laughter-section">
+        <div class="scrolly-graphic">
+            <div id="laughter-viz" class="viz-container"></div>
+        </div>
+        <div class="scrolly-steps">
+            <div class="step" data-step="0">
+                <h2>The single strongest predictor of a talk's success</h2>
+                <p>After running every statistical test I could think of, one pattern emerged above all others.</p>
+            </div>
+            <div class="step" data-step="1">
+                <h2>It's whether you make people laugh</h2>
+                <p>Talks with "(Laughter)" in their transcript get <strong>2.42M average views</strong>.</p>
+                <p>Talks without? <strong>1.68M views</strong>.</p>
+            </div>
+            <div class="step" data-step="2">
+                <h2>That's a 44% increase</h2>
+                <p>And it's statistically significant: r=0.218, p<0.0001</p>
+                <p>This isn't just noise. This is signal.</p>
+            </div>
+            <div class="step" data-step="3">
+                <h2>The transcript is data</h2>
+                <p>When you see "(Laughter)" in a transcript, it means the speaker generated a laugh. That's quantifiable charisma.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Data Explorer -->
+    <section class="explorer-section">
+        <div class="container">
+            <h2>Explore the Data Yourself</h2>
+            <div class="explorer-controls">
+                <label>
+                    <input type="checkbox" id="filter-laughter" checked>
+                    <span>Show talks with laughter</span>
+                </label>
+                <label>
+                    <input type="checkbox" id="filter-no-laughter" checked>
+                    <span>Show talks without laughter</span>
+                </label>
+                <label>
+                    <span>Minimum views:</span>
+                    <input type="range" id="views-slider" min="0" max="20000000" value="0" step="100000">
+                    <span id="views-display">0</span>
+                </label>
+            </div>
+            <div id="scatter-viz" class="viz-container"></div>
+            <div class="explorer-insights">
+                <div class="insight-box">
+                    <h4>What you're seeing</h4>
+                    <p>Each dot is a TED talk. Position shows word count vs. views. Color indicates whether it generated laughter in the first 30 seconds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scrollytelling Section 2: Questions Fail -->
+    <section class="scrolly-section" id="questions-section">
+        <div class="scrolly-graphic">
+            <div id="questions-viz" class="viz-container"></div>
+        </div>
+        <div class="scrolly-steps">
+            <div class="step" data-step="0">
+                <h2>Every presentation coach tells you to "start with a question"</h2>
+                <p>It's gospel. It "engages the audience" and "creates curiosity."</p>
+            </div>
+            <div class="step" data-step="1">
+                <h2>The data disagrees</h2>
+                <p>Question openers: <strong>0.72M median views</strong></p>
+                <p>Statement openers: <strong>1.38M median views</strong></p>
+            </div>
+            <div class="step" data-step="2">
+                <h2>Questions underperform by 48%</h2>
+                <p>Only 25 out of 4,005 talks (0.6%) start with questions.</p>
+                <p>The best speakers know something the coaches don't.</p>
+            </div>
+            <div class="step" data-step="3">
+                <h2>Why? Cognitive load.</h2>
+                <p>When you ask a question, the audience's brain starts trying to answer it. That's mental work. They're not listening—they're thinking.</p>
+                <p>Statements, jokes, and stories? Those are passive. You can just receive them.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Word Cloud Section -->
+    <section class="wordcloud-section">
+        <div class="container">
+            <h2>The Language of Success</h2>
+            <p class="section-intro">Words that correlate with more views appear larger. Click to see examples.</p>
+            <div id="wordcloud-viz" class="viz-container large"></div>
+            <div id="word-examples" class="word-examples hidden">
+                <button class="close-btn" onclick="closeWordExamples()">×</button>
+                <h3 id="selected-word"></h3>
+                <div id="example-talks"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Occupation Analysis -->
+    <section class="occupation-section">
+        <div class="container">
+            <h2>Psychologists Have Cracked the Code</h2>
+            <p class="section-intro">Median views by speaker occupation. Hover to see details.</p>
+            <div id="occupation-viz" class="viz-container"></div>
+            <div class="occupation-insight">
+                <p><strong>Psychologists dominate</strong> with 2.48M median views—84% higher than artists.</p>
+                <p>They're trained to understand human attention, emotion, and narrative. They know what makes people lean in.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Viral Talks Section -->
+    <section class="viral-section">
+        <div class="container">
+            <h2>The Top 10 Most Viral Talks</h2>
+            <div id="viral-list" class="viral-list"></div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2>The Evolution of TED</h2>
+            <p class="section-intro">How opening strategies changed from 2006 to 2020</p>
+            <div id="timeline-viz" class="viz-container large"></div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="methodology-section">
+        <div class="container">
+            <h2>Methodology</h2>
+            <div class="methodology-content">
+                <div class="method-box">
+                    <h3>Data Collection</h3>
+                    <p>4,005 TED talk transcripts scraped from TED.com with proper rate limiting. Opening lines extracted via newline parsing with edge case handling for interview formats.</p>
+                </div>
+                <div class="method-box">
+                    <h3>Statistical Analysis</h3>
+                    <p>Spearman rank correlation for word-view relationships. Mann-Whitney U tests for group comparisons. All tests at α=0.05 significance level.</p>
+                </div>
+                <div class="method-box">
+                    <h3>Limitations</h3>
+                    <p>Correlation ≠ causation. Transcript metadata may have inconsistent annotation. Views are cumulative and age-biased. Findings may not generalize beyond TED.</p>
+                </div>
+                <div class="method-box">
+                    <h3>Code & Data</h3>
+                    <p>Full analysis code and dataset available on <a href="https://github.com/brandondey/ted-talk-openers-analysis" target="_blank">GitHub</a>. Reproducible with Python 3.10+.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="conclusion-section">
+        <div class="container">
+            <h2>The Real Insight</h2>
+            <p class="conclusion-text">After all this analysis, here's what I actually believe:</p>
+            <p class="conclusion-emphasis">The opener doesn't make the talk. The talk makes the opener.</p>
+            <p>A great opener is great because of what follows it. Ken Robinson's "I'm leaving" works because he spends the next 18 minutes proving he should have stayed.</p>
+            <p>So stop optimizing your opener. <strong>Optimize your ideas</strong>.</p>
+            <p>And maybe—just maybe—try to make them laugh.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Analysis by Brandon Dey | February 2025</p>
+            <p><a href="https://github.com/brandondey/ted-talk-openers-analysis">View on GitHub</a> | <a href="https://github.com/brandondey/ted-talk-openers-analysis/blob/main/README.md">Read the technical report</a></p>
+        </div>
+    </footer>
+
+    <script src="visualizations.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
