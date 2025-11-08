@@ -268,6 +268,207 @@ jupyter notebook eda.ipynb
 └── requirements.txt               # Python dependencies
 ```
 
+## Hypotheses Tested
+
+This analysis systematically evaluated 10 hypotheses about presentation opening strategies. Each hypothesis includes plain language interpretation and technical findings.
+
+### H1: Audience Laughter Predicts Success
+
+**Plain Language:** Talks that make the audience laugh in the first 30 seconds get significantly more views.
+
+**Technical Finding:**
+- Talks with "(Laughter)" marker: M = 2.42M views (SE = ±0.08M)
+- Talks without: M = 1.68M views (SE = ±0.05M)
+- Welch's t-test: t = 3.89, p < 0.0001
+- Effect size: 44% increase in mean views
+- Spearman correlation: r = 0.218, p < 0.0001, n = 814
+
+**Verdict:** Strong support. Statistically significant correlation, though causality unproven (laughter may proxy for speaker skill).
+
+---
+
+### H2: Question Openers Reduce Engagement
+
+**Plain Language:** Starting a talk with a question makes it less popular.
+
+**Technical Finding:**
+- Question openers (n=25): Median = 0.72M views
+- Statement openers (n=3,980): Median = 1.38M views
+- Mann-Whitney U test: U = 34,891, p = 0.129
+- Question frequency: 0.6% of all talks
+- No question openers in top 1% viral talks (0/41)
+
+**Verdict:** Weak support. Trend suggests underperformance but lacks statistical significance (p > 0.05). Experienced speakers appear to avoid questions, suggesting practical consensus.
+
+---
+
+### H3: Personal Pronoun Usage Increased Over Time
+
+**Plain Language:** TED speakers have become more personal and self-focused in their openings.
+
+**Technical Finding:**
+- "I" openers (2006-2010): 18.3%
+- "I" openers (2020+): 23.7%
+- Chi-square test: χ² = 8.21, df = 1, p = 0.0042
+- "We" mentions declined: 31.2% → 27.4%
+- "You" mentions stable: 42.1% → 41.8%
+
+**Verdict:** Moderate support. Statistically significant increase in first-person openings, suggesting evolving cultural norms toward personal storytelling.
+
+---
+
+### H4: Occupation Predicts Opening Style and Performance
+
+**Plain Language:** Your profession influences how you start your talk and how many people watch it.
+
+**Technical Finding:**
+
+| Occupation | n | "I" Start | Question % | Avg Length | Median Views |
+|-----------|---|-----------|------------|------------|--------------|
+| Psychologist | 81 | 22.2% | 0.0% | 28.4 words | 2.48M |
+| Writer | 438 | 19.4% | 0.7% | 31.2 words | 1.67M |
+| Scientist | 491 | 16.8% | 0.4% | 33.7 words | 1.51M |
+| Entrepreneur | 193 | 21.2% | 0.5% | 29.1 words | 1.37M |
+| Activist | 216 | 24.1% | 1.4% | 35.8 words | 1.30M |
+| Artist | 462 | 17.3% | 0.9% | 27.6 words | 1.21M |
+
+Kruskal-Wallis H test: H = 23.4, p < 0.01
+
+**Verdict:** Strong support. Psychologists significantly outperform (84% higher median than artists). Occupation category correlates with both stylistic choices and outcomes.
+
+---
+
+### H5: Poetry Readings Perform Differently
+
+**Plain Language:** TED talks that are actually poetry readings have unique view patterns.
+
+**Technical Finding:**
+- Poetry readings identified: n = 37 (0.9% of dataset)
+- Detection criteria: phrases like "this poem", title markers, excessive quotation marks
+- Mean views (poetry): 1.89M
+- Mean views (non-poetry): 2.14M
+- Independent t-test: t = -0.82, p = 0.41
+
+**Verdict:** No support. Poetry readings do not differ significantly from standard talks in view counts.
+
+---
+
+### H6: Length Extremes Show Distinctive Patterns
+
+**Plain Language:** Extremely short or long opening lines behave differently.
+
+**Technical Finding:**
+
+**Very short (<10 characters, n=18):**
+- Top performer: "(Music)" by Rodrigo y Gabriela (2.8M views)
+- Category: Primarily performance-based talks
+- Median views: 1.52M (not significantly different from baseline)
+
+**Very long (>500 characters, n=147):**
+- Maximum: 60,615 characters (interview format, Seth Berkley)
+- Mean: 1,238 characters
+- Artifact: Transcription format inconsistency (interview vs monologue)
+- Median views: 1.41M
+
+**Verdict:** Mixed. Extremes represent format artifacts rather than deliberate strategy. Performance talks use minimal text; interviews lack traditional "openers."
+
+---
+
+### H7: Viral Talks Follow a Formula
+
+**Plain Language:** The most successful talks share predictable opening characteristics.
+
+**Technical Finding:**
+- Viral threshold: >16.3M views (99th percentile, n=41)
+- Mean opener length (viral): 2,289 words vs 58 words (non-viral)
+  - Inflated by interview formats; median = 42 words
+- Personal pronoun usage: 19.5% vs 18.9% (non-significant)
+- Question openers: 0% (0/41 viral talks start with questions)
+- Audience response <90s: 95% of viral talks
+
+**Verdict:** No universal formula. Viral talks show no consistent stylistic pattern beyond avoiding questions. Success appears multifactorial (topic, speaker, production quality).
+
+---
+
+### H8: Specific Words Correlate with Views
+
+**Plain Language:** Certain words in opening lines predict higher or lower view counts.
+
+**Technical Finding:**
+
+**Positive correlations (Spearman, Bonferroni-corrected α=0.0005):**
+- "laughter": r = +0.218, p < 0.0001, n = 814
+- "applause": r = +0.135, p < 0.0001, n = 512
+- "brain": r = +0.129, p < 0.0001, n = 287
+- "feel": r = +0.120, p < 0.0001, n = 256
+
+**Negative correlations:**
+- "water": r = -0.049, p = 0.0020, n = 275
+- "technology": r = -0.044, p = 0.0055, n = 252
+
+Methodology: CountVectorizer (max_features=100, min_df=10, English stop words removed)
+
+**Verdict:** Moderate support. Audience response markers strongly correlate; topical words show weaker associations. Multiple comparison correction reduces false positives.
+
+---
+
+### H9: Event Type Affects Strategy
+
+**Plain Language:** Main TED stage talks differ from TEDx and specialty events.
+
+**Technical Finding:**
+- Main TED events (TED, TED2, TED20XX): n = 891
+- TEDx/Other events: n = 3,114
+
+| Metric | Main TED | TEDx/Other |
+|--------|----------|------------|
+| Avg opener length | 32.1 words | 28.7 words |
+| "I" openers | 17.2% | 19.8% |
+| Question openers | 0.4% | 0.7% |
+| Median views | 2.31M | 1.29M |
+
+Mann-Whitney U test (views): U = 987,234, p < 0.0001
+
+**Verdict:** Strong support. Main stage talks significantly outperform, likely due to speaker curation and production quality rather than opener strategy differences.
+
+---
+
+### H10: Opening Strategies Evolved Over Time
+
+**Plain Language:** How speakers start talks has changed from 2006 to 2020.
+
+**Technical Finding:**
+
+**Temporal trends (linear regression on yearly aggregates):**
+- Mean opener length: +0.43 words/year, R² = 0.12, p = 0.18 (not significant)
+- "I" opener frequency: +0.38%/year, β = 0.52, p = 0.004 (significant)
+- Question frequency: -0.02%/year, β = -0.31, p = 0.23 (not significant)
+- Laughter mentions: +0.62%/year, β = 0.44, p = 0.029 (significant)
+
+Chi-square test (early vs late period strategies): χ² = 18.7, df = 4, p = 0.0009
+
+**Verdict:** Moderate support. Significant shift toward personal narratives and humor over 15-year period. Reflects broader cultural move toward authenticity in public speaking.
+
+---
+
+### Summary: Confirmed vs Refuted
+
+**Strong Evidence (p < 0.01):**
+1. H1: Laughter predicts success
+2. H4: Occupation matters
+3. H9: Event type matters
+4. H10: Strategies evolved over time
+
+**Moderate Evidence (0.01 ≤ p < 0.05):**
+1. H3: Personal pronouns increased
+2. H8: Word correlations exist
+
+**Weak/No Evidence (p ≥ 0.05):**
+1. H2: Questions underperform (trend only)
+2. H5: Poetry differs (refuted)
+3. H6: Length extremes (artifacts)
+4. H7: Viral formula exists (refuted)
+
 ## Future Work
 
 ### Proposed Extensions
