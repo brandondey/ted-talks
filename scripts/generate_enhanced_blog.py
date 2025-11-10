@@ -11,6 +11,7 @@ import numpy as np
 from collections import Counter
 import re
 import base64
+import os
 from io import BytesIO
 from wordcloud import WordCloud
 import json
@@ -19,9 +20,17 @@ import json
 plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
+# Determine paths based on execution location
+if os.path.exists("data/ted_talks_en.csv"):
+    data_path = "data/ted_talks_en.csv"
+    output_path = "outputs/ted_talk_openers_analysis_enhanced.html"
+else:
+    data_path = "../data/ted_talks_en.csv"
+    output_path = "../outputs/ted_talk_openers_analysis_enhanced.html"
+
 # Load data
 print("Loading TED talks data...")
-df = pd.read_csv("data/ted_talks_en.csv")
+df = pd.read_csv(data_path)
 
 # Extract first lines
 df['first_line'] = df['transcript'].apply(lambda txt: txt.split("\n")[0] if isinstance(txt, str) else "")
@@ -912,7 +921,7 @@ html_content = f"""<!DOCTYPE html>
 """
 
 # Write HTML file
-output_path = "ted_talk_openers_analysis_enhanced.html"
+os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(html_content)
 

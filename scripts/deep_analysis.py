@@ -9,6 +9,7 @@ import numpy as np
 from collections import Counter, defaultdict
 import re
 import json
+import os
 from scipy import stats
 from datetime import datetime
 import warnings
@@ -18,8 +19,16 @@ print("=" * 80)
 print("DEEP ANALYSIS: TED TALK OPENERS")
 print("=" * 80)
 
+# Determine paths based on execution location
+if os.path.exists("data/ted_talks_en.csv"):
+    data_path = "data/ted_talks_en.csv"
+    output_path = "outputs/insights_data.json"
+else:
+    data_path = "../data/ted_talks_en.csv"
+    output_path = "../outputs/insights_data.json"
+
 # Load data
-df = pd.read_csv("data/ted_talks_en.csv")
+df = pd.read_csv(data_path)
 df['first_line'] = df['transcript'].apply(lambda txt: txt.split("\n")[0] if isinstance(txt, str) else "")
 df['first_line_length'] = df['first_line'].apply(lambda x: len(str(x)))
 df['first_line_word_count'] = df['first_line'].apply(lambda x: len(str(x).split()))
@@ -309,10 +318,11 @@ insights_data = {
 }
 
 # Save for the visualization script
-with open('insights_data.json', 'w') as f:
+os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
+with open(output_path, 'w') as f:
     json.dump(insights_data, f, indent=2)
 
-print("\n✅ Saved insights_data.json")
+print(f"\n✅ Saved {output_path}")
 print("\n" + "=" * 80)
 print("ANALYSIS COMPLETE")
 print("=" * 80)

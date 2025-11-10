@@ -232,16 +232,18 @@ Analysis notebooks:
 
 ```bash
 # Run statistical analysis
-python deep_analysis.py
+python scripts/deep_analysis.py
 
 # Generate visualizations and HTML output
-python generate_enhanced_blog.py
+python scripts/generate_enhanced_blog.py
 
 # Explore data interactively
-jupyter notebook eda.ipynb
+jupyter notebook notebooks/eda.ipynb
 ```
 
 ### Output Files
+
+All generated files are saved to `outputs/`:
 
 - `insights_data.json`: Structured analysis results (37MB)
 - `THE_LAUGHTER_EFFECT_FINAL.html`: Publication-ready blog post
@@ -252,20 +254,26 @@ jupyter notebook eda.ipynb
 ```
 .
 ├── data/
-│   └── ted_talks_en.csv           # Primary dataset (44MB)
-├── eda.ipynb                      # Exploratory data analysis
-├── logic.ipynb                    # Web scraping implementation
-├── deep_analysis.py               # Statistical tests and insights extraction
-├── generate_blog.py               # Basic visualization pipeline
-├── generate_enhanced_blog.py      # Advanced visualization + blog generation
-├── THE_LAUGHTER_EFFECT_FINAL.html # Main deliverable
-├── pudding_style_blog.html        # Narrative-focused version
-├── ted_talk_openers_analysis.html # Technical analysis with charts
-├── ted_talks_report.pdf           # High-perplexity examples (top 100)
-├── ted_talks_report_tail.pdf      # Low-perplexity examples (bottom 100)
-├── insights_data.json             # Serialized analysis results
-├── README.md                      # This file
-└── requirements.txt               # Python dependencies
+│   └── ted_talks_en.csv              # Primary dataset (44MB)
+├── scripts/
+│   ├── deep_analysis.py              # Statistical tests and insights extraction
+│   ├── generate_blog.py              # Basic visualization pipeline
+│   └── generate_enhanced_blog.py     # Advanced visualization + blog generation
+├── notebooks/
+│   ├── eda.ipynb                     # Exploratory data analysis
+│   └── logic.ipynb                   # Web scraping implementation
+├── outputs/
+│   ├── THE_LAUGHTER_EFFECT_FINAL.html   # Main deliverable
+│   ├── pudding_style_blog.html          # Narrative-focused version
+│   ├── ted_talk_openers_analysis.html   # Technical analysis with charts
+│   ├── ted_talk_openers_analysis_enhanced.html
+│   ├── ted_talks_report.pdf             # High-perplexity examples (top 100)
+│   ├── ted_talks_report_tail.pdf        # Low-perplexity examples (bottom 100)
+│   └── insights_data.json               # Serialized analysis results
+├── docs/
+│   └── [Interactive GitHub Pages site]  # Live at brandondey.github.io/ted-talks
+├── README.md                         # This file
+└── requirements.txt                  # Python dependencies
 ```
 
 ## Hypotheses Tested
